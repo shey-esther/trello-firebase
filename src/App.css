@@ -1,0 +1,92 @@
+
+
+.bodyfirst{
+ 
+  /* padding: 9% 11% 15% 11%; */
+  text-align: center;
+}
+.bodyfirstboard{
+  text-align: center;
+  /* padding: 1% 0% 3% 0%; */
+  background: #745286;
+}
+body{
+  background: #89609E; 
+}
+.logo1 {
+  display: inline-block;
+  margin-top: 5%;
+  background: url(./img/logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 100px;
+  vertical-align: middle;
+}
+.logo {
+  margin: 3%;
+  display: inline-block;
+  background: url(./img/logo.png);
+  background-size: contain;
+  height: 62px;
+  width: 198px;
+  vertical-align: middle;
+}
+.imptall{
+  border: 0px none;
+  width: 50%;
+  padding: 1em;
+  font-size: 1.1em;
+  margin: .5em 0;
+  box-sizing: inherit;
+}
+.butontrans{
+  transition: all 0.15s ease-out 0s;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  width: 53%;
+  padding: 1em;
+  font-size: 1.1em;
+ }
+ .cols{
+   display: inline-block;
+   margin-right: 10%;
+   margin-left: 10%;
+ }
+ @media screen and (max-width: 600px){
+  .input{
+    width: 250px;
+  }
+  .button{
+    width: 100%;
+  }
+  .bodyfirst{
+    padding: 2%;
+    
+  }
+  }
+.footer{
+  margin-top: 1%;
+  padding: 2%;
+  background: #745286;
+}
+ a{
+ text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+ }
+ .addinit{
+  margin: 1%;
+  padding: 1%;
+ }
+.addinput1{
+  border-radius: 5%;
+  padding: 1%;
+}
+ .addinput{
+   border-radius: 5%;
+   margin: 2%;
+   border: 1px solid #5A0B5A;
+   padding: 1%;
+   background-color: #5A0B5A;
+ }
