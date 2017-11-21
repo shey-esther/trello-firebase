@@ -1,13 +1,3 @@
-// import store from "./store";
-
-// export const selectMenu = (index) => {
-//     console.log(index);
-//     const selectMenu = index;
-//     store.setState({
-//         selectedItem: selectMenu
-//     })
-// };
-
 import store from './store'
 import firebase from 'firebase';
 
@@ -20,63 +10,90 @@ var config = {
     projectId: "trello-firebase",
     storageBucket: "trello-firebase.appspot.com",
     messagingSenderId: "424461727247"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
-export function readBoard () {
-   firebase.database().ref('stages').on ('value', res => {
-      let stages = []
-      res.forEach ( snap  => {
-         const stage = snap.val();
-         stages.push (stage);
-      })
-      store.setState ({
-         stages : stages
-      }) 
-   });
+export function readBoard() {
+    firebase.database().ref('stages').on('value', res => {
+        let stages = []
+        res.forEach(snap => {
+            const stage = snap.val();
+            stages.push(stage);
+        })
+        store.setState({
+            stages: stages
+        })
+    });
 
-   firebase.database().ref('tasks').on ('value', res => {
-      let tasks = [];
-      res.forEach ( snap  => {
-          const task = snap.val();
-          tasks.push (task)
-      })      
-      store.setState ({
-         tasks : tasks
-      }) 
-   });   
+    firebase.database().ref('tasks').on('value', res => {
+        let tasks = [];
+        res.forEach(snap => {
+            const task = snap.val();
+            tasks.push(task)
+        })
+        store.setState({
+            tasks: tasks
+        })
+    });
 }
 
-export function  addStage (text) {
-console.log('text', text)
-   let stages = [...store.getState().stages];
-   stages.push (  text )
-//    store.setState ({
-//       stages : stages
-//    }) 
+export function addStage(text) {
+    console.log('text', text)
+    let stages = [...store.getState().stages];
+    stages.push(text)
+    //    store.setState ({
+    //       stages : stages
+    //    }) 
 
-   firebase.database().ref('stages/').push (text);
+    firebase.database().ref('stages/').push(text);
 }
 
-export function  addTask (stage, text) {
-   console.log ('addTask:', stage + ' - ' +  text);
+export function addTask(stage, text) {
+    console.log('addTask:', stage + ' - ' + text);
 
-   let tasks = [...store.getState().tasks];
+    let tasks = [...store.getState().tasks];
 
-   let newTask = {
-      id : store.getState().tasks.length,
-      title: text,
-      stage : stage
-   } 
+    let newTask = {
+        id: store.getState().tasks.length,
+        title: text,
+        stage: stage
+    }
 
-   firebase.database().ref('tasks/' + newTask.id).set (newTask);
-   /*
-   store.setState ({
-      tasks : tasks
-   })  */
+    firebase.database().ref('tasks/' + newTask.id).set(newTask);
+    /*
+    store.setState ({
+       tasks : tasks
+    })  */
 }
 
 
+
+export function signUser(firstName, lastName, email, pass) {
+    // creando un usuario nuevo y a la ves autentificandolo.
+    firebase.auth().createUserWithEmailAndPassword(email, pass).then(user => {
+        let newuser = {
+            firstName, lastName, email
+        }
+        firebase.database().ref('users/' + user.uid).set(newuser);
+    })
+
+}
+
+export function signOut() {
+    firebase.auth().signOut();
+    store.setState({
+        user: ''
+    })
+}
+
+// Autentificando el nombre y pasword del usuario
+export function signUserLo(user, pass) {
+    firebase.auth().signInWithEmailAndPassword(user, pass).catch(e => {
+        store.setState({
+            login: true
+        })
+    })
+}
 
 
 

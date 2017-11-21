@@ -90,7 +90,6 @@ class Singin extends Component {
             <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
               <div className='input-group'>
                 <span className="input-group-addon"><i id="arrow" className="fa fa-user-o fa-2x" ></i></span>
-                {/* <label htmlFor="email">Email address</label> <span className="input-group-addon"><i id="arrow" className="fa fa-user-o fa-2x" ></i></span>*/}
                 <input type="email" required className="form-control imptall" name="email"
                   placeholder="Email" value={this.state.email} onChange={this.handleUserInput} />
               </div>
@@ -113,6 +112,5 @@ class Singin extends Component {
     )
   }
 }
-// export default Singin;
 const mapToProps = ({ trello }) => ({ trello });
 export default connect(mapToProps)(Singin);

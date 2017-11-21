@@ -5,7 +5,7 @@ import { HashRouter, Switch, Route, NavLink } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
-class HeaderApp extends Component {
+class Header extends Component {
   render() {
     return (
       <header>
@@ -22,8 +22,7 @@ class Singup extends Component {
       lastname: '',
       email: '',
       password: '',
-      newpassword: '',
-      formErrors: { name: '', lastname: '', email: '', password: '', newpassword: '' },
+      formErrors: { name: '', lastname: '', email: '', password: '' },
       emailValid: false,
       passwordValid: false,
       formValid: false
@@ -43,7 +42,6 @@ class Singup extends Component {
     let lastValid = this.setState.lastValid;
     let emailValid = this.state.emailValid;
     let passwordValid = this.state.passwordValid;
-    let newpasswordValid = this.state.newpasswordValid;
 
     switch (fieldName) {
       case 'name':
@@ -59,11 +57,6 @@ class Singup extends Component {
         passwordValid = value.length >= 6;
         fieldValidationErrors.password = passwordValid ? '' : ' is too short';
         break;
-
-      case 'password':
-        newpasswordValid = value.length >= 6;
-        fieldValidationErrors.newpassword = newpasswordValid ? '' : ' is too short';
-        break;
       default:
         break;
     }
@@ -72,12 +65,11 @@ class Singup extends Component {
       nameValid: nameValid,
       emailValid: emailValid,
       passwordValid: passwordValid,
-      newpasswordValid:newpasswordValid
     }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({ formValid: this.state.nameValid && this.state.emailValid && this.state.passwordValid && this.state.newpasswordValid });
+    this.setState({ formValid: this.state.nameValid && this.state.emailValid && this.state.passwordValid });
   }
 
   errorClass(error) {
@@ -87,13 +79,11 @@ class Singup extends Component {
   render() {
     return (
       <main className="bodyfirst">
-        <HeaderApp />
+        <Header />
         <div className="container">
-          <form className="demoForm">
-            <div className="panel panel-default"></div>
+          <form >
             <div className={`form-group ${this.errorClass(this.state.formErrors.name)}`}>
               <div className='input-group'>
-                <span className="input-group-addon"><i id="arrow" className="fa fa-user-o fa-2x" ></i></span>
                 <input type="name" required className="form-control imptall" name="name"
                   placeholder="Name" value={this.state.name} onChange={this.handleUserInput} />
               </div>
@@ -101,7 +91,6 @@ class Singup extends Component {
 
             <div className={`form-group ${this.errorClass(this.state.formErrors.lastname)}`}>
               <div className='input-group'>
-                <span className="input-group-addon"><i id="arrow" className="fa fa-user-o fa-2x" ></i></span>
                 <input type="lastname" required className="form-control imptall" name="lastname"
                   placeholder="Lastname" value={this.state.lastname} onChange={this.handleUserInput} />
               </div>
@@ -109,29 +98,25 @@ class Singup extends Component {
 
             <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
               <div className='input-group'>
-                <span className="input-group-addon"><i id="arrow" className="fa fa-user-o fa-2x" ></i></span>
                 <input type="email" required className="form-control imptall" name="email"
                   placeholder="Email" value={this.state.email} onChange={this.handleUserInput} />
               </div>
             </div>
             <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
               <div className='input-group'>
-                <span className="input-group-addon"><i className="fa fa-key fa-fw lock"></i></span>
                 <input type="password" className="form-control imptall" name="password"
                   placeholder="Password" value={this.state.password} onChange={this.handleUserInput} />
               </div>
             </div>
-
-            <div className={`form-group ${this.errorClass(this.state.formErrors.newpassword)}`}>
+            <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
               <div className='input-group'>
-                <span className="input-group-addon"><i className="fa fa-key fa-fw lock"></i></span>
                 <input type="password" className="form-control imptall" name="password"
-                  placeholder="Confirm password" value={this.state.newpassword} onChange={this.handleUserInput} />
+                  placeholder="Confirm password" value={this.state.password} onChange={this.handleUserInput} />
               </div>
             </div>
             {
               this.state.formValid ? <NavLink to={"/board"} className="btn btn-lg butontrans">Sing Up</NavLink>
-                : <button type="submit" className="btn btn-lg butontrans" disabled={!this.state.formValid}>Sign Up</button>
+                : <button type="submit" className="btn btn-lg butontrans" disabled={!this.state.formValid}>Sing Up</button>
             }<br /><br />
             <NavLink to={"/singin"} >Sing in</NavLink>
           </form>

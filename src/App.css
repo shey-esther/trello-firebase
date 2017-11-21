@@ -90,3 +90,13 @@ body{
    padding: 1%;
    background-color: #5A0B5A;
  }
+
+ .list{
+  background-color: #d2c4c4;
+  margin: 2%;
+  padding: 3%;
+  display: inline-block;
+ }
+ .btnb{
+  background-color: purple;
+}
